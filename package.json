@@ -1,0 +1,14 @@
+{
+  "name": "passhroom-root",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "deploy": "./scripts/deploy-host/rsync-deploy.sh --run-remote",
+    "deploy:sync": "./scripts/deploy-host/rsync-deploy.sh",
+    "deploy:dry": "./scripts/deploy-host/rsync-deploy.sh --dry-run",
+    "deploy:bootstrap-env": "./scripts/deploy-host/rsync-deploy.sh --bootstrap-env",
+    "server:restart": "bash ./scripts/deploy-host/restart.sh",
+    "db:backup": "bash ./scripts/deploy-host/db-backup.sh",
+    "db:restore": "bash ./scripts/deploy-host/db-restore.sh"
+  }
+}
