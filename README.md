@@ -1,6 +1,11 @@
-# Passhroom
+<h1>
+  <img src="passhroom/assets/poison-shroom.png" alt="Passhroom logo" width="48" height="48" style="vertical-align: middle; margin-right: 8px;" />
+  Passhroom
+</h1>
 
 Self-hosted passwordless magic-link auth service.
+
+Created by fufroom (Alex Bezuska).
 
 ## What this repo contains
 
@@ -78,6 +83,10 @@ This feature adds two DB tables: `admin_login_requests` and `admin_sessions`.
   - `docker exec -it passhroom-api sh -lc "cd /app && npm run migrate:up"`
 
 ### Use
+
+## License
+
+MIT (see LICENSE).
 
 - Visit: `https://passhroom.example.com/admin/login`
 - Enter the admin email and click “Send magic link”
