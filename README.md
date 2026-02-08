@@ -3,6 +3,9 @@
   Passhroom
 </h1>
 
+*Because passwords SUCK!*
+
+
 Self-hosted passwordless magic-link auth service.
 
 Created by fufroom (Alex Bezuska).
