@@ -7,7 +7,7 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "assets:favicons": "npx -y pwa-asset-generator assets/poison-shroom.png assets/favicons --favicon --manifest",
+    "assets:favicons": "npx -y pwa-asset-generator assets/passhroom.png assets/favicons --favicon --manifest",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "migrate:up": "node-pg-migrate -f node-pg-migrate.config.cjs up",

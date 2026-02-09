@@ -36,19 +36,11 @@ When the user types their email in your app, your **server** calls Passhroom:
 
 Notes:
 - Generate a random `state` and store it temporarily (simplest: in an httpOnly cookie or your server session).
-- Passhroom emails the user both:
-  - A magic link
-  - A sign-in code (a random mushroom common name)
-
-The user can either:
-- Click the magic link, or
-- Visit `{PASSHROOM_BASE_URL}/code` and enter their email + the code
-
-Using either option invalidates the other.
+- Passhroom emails the user a magic link.
 
 ## 2) Handle the callback (your app receives code + state)
 
-After the user completes sign-in (via magic link or via the code entry page), the browser is redirected to your callback URL:
+After the user clicks the magic link, the browser is redirected to your callback URL:
 
 `GET /auth/passhroom/callback?code=...&state=...`
 

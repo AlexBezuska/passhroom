@@ -27,7 +27,7 @@ function page(
     bodyClass?: string;
   }
 ): string {
-  const accent = '#ff2bd6';
+  const accent = '#7D3998';
   const htmlClass = options?.htmlClass ? ` class="${htmlEscape(options.htmlClass)}"` : '';
   const bodyClass = options?.bodyClass ? ` class="${htmlEscape(options.bodyClass)}"` : '';
   return `<!doctype html>
@@ -42,38 +42,47 @@ function page(
     <link rel="shortcut icon" href="/favicon.ico" />
     <style>
       :root {
-        --bg: #0b0b10;
-        --panel: #12121b;
-        --text: #e9e9f1;
-        --muted: #a6a6bf;
-        --accent: ${accent};
-        --border: rgba(255,255,255,0.10);
+        --inkcap-midnight: #2D0D3C;
+        --potioncap-purple: #7D3998;
+        --spore-mauve: #916686;
+        --moonmilk-cream: #FEF9E3;
+        --biscuit-mycelium: #CBBEA9;
+        --keyglow-gold: #F9D34D;
+
+        --bg: var(--moonmilk-cream);
+        --panel: rgba(254,249,227,0.88);
+        --text: var(--inkcap-midnight);
+        --muted: rgba(45,13,60,0.72);
+        --primary: var(--potioncap-purple);
+        --primary-2: var(--spore-mauve);
+        --accent: var(--keyglow-gold);
+        --border: var(--biscuit-mycelium);
 
         --gap: 16px;
         --topH: 64px;
 
-        /* Semantic state (used sparingly; brand stays purple) */
-        --success: rgba(58, 208, 120, 1);
-        --warning: rgba(245, 158, 11, 1);
-        --danger: rgba(239, 68, 68, 1);
-        --info: rgba(96, 165, 250, 1);
+        /* Semantic state (mapped to brand palette) */
+        --success: var(--primary);
+        --warning: var(--accent);
+        --danger: var(--inkcap-midnight);
+        --info: var(--primary-2);
 
-        --helpText: rgba(233,233,241,0.72);
+        --helpText: rgba(45,13,60,0.72);
       }
       * { box-sizing: border-box; }
       html, body { height: 100%; }
       body {
         margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
         color: var(--text);
-        background: radial-gradient(1200px 500px at 50% -10%, rgba(255,43,214,0.22), rgba(0,0,0,0)), var(--bg);
+        background: radial-gradient(1200px 500px at 50% -10%, rgba(125,57,152,0.12), rgba(254,249,227,0)), var(--bg);
         font-size: 16px;
-        line-height: 1.45;
+        line-height: 1.5;
       }
       @media (min-width: 1040px) {
         html.consoleMode, html.consoleMode body { height: 100%; overflow: hidden; }
       }
-      a { color: var(--accent); text-decoration: none; }
+      a { color: var(--primary); text-decoration: none; }
       a:hover { text-decoration: underline; }
       .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 16px 28px; }
       body.consoleMode .wrap {
@@ -112,11 +121,11 @@ function page(
       .brand h1 { margin: 0; font-size: 22px; letter-spacing: 0.3px; }
       .tag { font-size: 14px; color: var(--muted); }
       .panel {
-        background: rgba(18,18,27,0.82);
+        background: var(--panel);
         border: 1px solid var(--border);
         border-radius: 14px;
         padding: 16px;
-        box-shadow: 0 20px 70px rgba(0,0,0,0.55);
+        box-shadow: 0 12px 40px rgba(45,13,60,0.10);
       }
 
       /* Console layout (no page scroll; internal panel scroll only) */
@@ -125,16 +134,6 @@ function page(
         grid-template-columns: 1fr;
         gap: var(--gap);
         min-height: 0;
-      }
-      @media (min-width: 1040px) {
-        .console {
-          grid-template-columns: 1.55fr 1fr;
-        }
-      }
-      @media (min-width: 1440px) {
-        .console {
-          grid-template-columns: 1.65fr 1fr;
-        }
       }
       body.consoleMode .console {
         flex: 1 1 auto;
@@ -159,7 +158,7 @@ function page(
       .modalBack {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,0.62);
+        background: rgba(45,13,60,0.42);
         display: none;
         align-items: center;
         justify-content: center;
@@ -183,13 +182,13 @@ function page(
       }
       .modalClose {
         border: 1px solid var(--border);
-        background: rgba(0,0,0,0.18);
+        background: rgba(254,249,227,0.92);
         color: var(--text);
         border-radius: 10px;
         padding: 8px 10px;
         cursor: pointer;
       }
-      .modalClose:hover { border-color: rgba(255,43,214,0.45); }
+      .modalClose:hover { border-color: var(--primary); }
 
       h2 { margin: 0; font-size: 18px; }
       p { margin: 0; }
@@ -199,7 +198,7 @@ function page(
         width: 100%;
         border-radius: 10px;
         border: 1px solid var(--border);
-        background: rgba(0,0,0,0.22);
+        background: rgba(254,249,227,0.92);
         color: var(--text);
         padding: 12px 12px;
         font-size: 16px;
@@ -209,7 +208,7 @@ function page(
         width: 100%;
         border-radius: 10px;
         border: 1px solid var(--border);
-        background: rgba(0,0,0,0.22);
+        background: rgba(254,249,227,0.92);
         color: var(--text);
         padding: 12px 12px !important;
         font-size: 16px !important;
@@ -217,12 +216,12 @@ function page(
       }
       textarea { min-height: 110px; resize: vertical; }
       input:focus, textarea:focus {
-        border-color: rgba(255,43,214,0.55);
-        box-shadow: 0 0 0 3px rgba(255,43,214,0.16);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(125,57,152,0.18);
       }
       select:focus {
-        border-color: rgba(255,43,214,0.55);
-        box-shadow: 0 0 0 3px rgba(255,43,214,0.16);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(125,57,152,0.18);
       }
       .row { display: grid; grid-template-columns: 1fr; gap: 10px; }
       @media (min-width: 700px) { .row { grid-template-columns: 1fr 1fr; } }
@@ -232,13 +231,14 @@ function page(
         justify-content: center;
         padding: 12px 14px;
         border-radius: 10px;
-        border: 1px solid rgba(255,43,214,0.55);
-        background: linear-gradient(180deg, rgba(255,43,214,0.22), rgba(255,43,214,0.08));
-        color: var(--text);
+        border: 1px solid var(--primary);
+        background: var(--primary);
+        color: var(--moonmilk-cream);
         cursor: pointer;
         font-weight: 600;
         font-size: 16px;
       }
+      .btn:hover { filter: brightness(1.03); }
       .btn:active { transform: translateY(1px); }
       .muted { color: var(--muted); }
       .hr { height: 1px; background: var(--border); margin: 14px 0; }
@@ -274,8 +274,8 @@ function page(
       }
       .tab[aria-current="page"] {
         color: var(--text);
-        border-color: rgba(255,43,214,0.55);
-        background: rgba(255,43,214,0.10);
+        border-color: var(--primary);
+        background: rgba(125,57,152,0.10);
       }
 
       .chip {
@@ -287,12 +287,12 @@ function page(
         border: 1px solid var(--border);
         font-size: 14px;
         color: var(--muted);
-        background: rgba(255,255,255,0.03);
+        background: rgba(125,57,152,0.06);
       }
-      .chip[data-tone="success"] { border-color: rgba(58,208,120,0.55); color: rgba(58,208,120,0.95); }
-      .chip[data-tone="warning"] { border-color: rgba(245,158,11,0.65); color: rgba(245,158,11,0.95); }
-      .chip[data-tone="danger"] { border-color: rgba(239,68,68,0.65); color: rgba(239,68,68,0.95); }
-      .chip[data-tone="info"] { border-color: rgba(96,165,250,0.65); color: rgba(96,165,250,0.95); }
+      .chip[data-tone="success"] { border-color: rgba(125,57,152,0.65); color: rgba(125,57,152,1); }
+      .chip[data-tone="warning"] { border-color: rgba(249,211,77,0.85); color: rgba(45,13,60,0.95); }
+      .chip[data-tone="danger"] { border-color: rgba(45,13,60,0.65); color: rgba(45,13,60,0.95); }
+      .chip[data-tone="info"] { border-color: rgba(145,102,134,0.75); color: rgba(145,102,134,1); }
 
       .kv { display: grid; grid-template-columns: 110px 1fr; gap: 8px 10px; font-size: 14px; }
       .k { color: var(--muted); }
@@ -301,7 +301,7 @@ function page(
       .copyBtn {
         margin-left: 8px;
         border: 1px solid var(--border);
-        background: rgba(255,255,255,0.04);
+        background: rgba(254,249,227,0.92);
         color: var(--text);
         border-radius: 10px;
         padding: 8px 10px;
@@ -319,11 +319,12 @@ function page(
         padding: 10px;
         border-radius: 12px;
         border: 1px solid var(--border);
-        background: rgba(0,0,0,0.18);
+        background: rgba(125,57,152,0.04);
         color: var(--text);
         cursor: pointer;
+        text-decoration: none;
       }
-      .listBtn:hover { border-color: rgba(255,255,255,0.16); }
+      .listBtn:hover { border-color: rgba(125,57,152,0.55); }
       .listBtn .sub { color: var(--muted); font-size: 14px; margin-top: 2px; }
 
       details > summary { cursor: pointer; color: var(--text); font-weight: 700; }
@@ -341,7 +342,7 @@ function page(
         font-size: 14px;
       }
       code {
-        background: rgba(255,255,255,0.06);
+        background: rgba(125,57,152,0.08);
         border: 1px solid var(--border);
         padding: 2px 6px;
         border-radius: 8px;
@@ -349,7 +350,7 @@ function page(
         font-size: 14px;
       }
       pre {
-        background: rgba(0,0,0,0.25);
+        background: rgba(125,57,152,0.04);
         border: 1px solid var(--border);
         padding: 12px;
         border-radius: 12px;
@@ -434,13 +435,21 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
   function renderConsole(args: {
     sessionEmail: string;
     totalUsers: number;
-    tab: 'users' | 'activity' | 'apps';
+    tab: 'users' | 'activity' | 'apps' | 'create-app';
     usersRowsHtml: string;
     usersQuery: string;
     usersPage: number;
     usersPageSize: number;
     usersTotalMatching: number;
-    clients: Array<{ client_id: string; redirect_uris: string[]; is_enabled: boolean }>;
+    clients: Array<{
+      client_id: string;
+      redirect_uris: string[];
+      is_enabled: boolean;
+      allowed_origins?: string[];
+      created_at?: string;
+      client_secret_hash?: string | null;
+      client_secret_plain?: string | null;
+    }>;
     clientsQuery: string;
     activity: Array<{
       kind: string;
@@ -480,7 +489,13 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     };
   }): string {
     const clientsJson = JSON.stringify(
-      args.clients.map((c) => ({ client_id: c.client_id, redirect_uris: c.redirect_uris, is_enabled: c.is_enabled }))
+      args.clients.map((c) => ({
+        client_id: c.client_id,
+        redirect_uris: c.redirect_uris,
+        allowed_origins: c.allowed_origins ?? [],
+        is_enabled: c.is_enabled,
+        created_at: c.created_at ?? ''
+      }))
     );
     const activityJson = JSON.stringify(args.activity);
 
@@ -490,19 +505,12 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     const activityJsonSafe = activityJson.replaceAll('<', '\\u003c');
 
     const output = args.output;
-    const tone = output ? statusToneFromHttp(output.httpStatus) : 'info';
-    const statusLabel =
-      !output
-        ? 'No runs yet'
-        : output.httpStatus >= 200 && output.httpStatus < 300
-          ? 'Success'
-          : output.httpStatus === 429
-            ? 'Rate-limited'
-            : 'Error';
-
-    const userCreatedText = output?.userCreated === true ? 'Yes' : output?.userCreated === false ? 'No' : '—';
-    const lastActionText = output?.lastAction ?? '—';
     const step1Ok = output?.lastAction === 'send_magic_link' && output.httpStatus >= 200 && output.httpStatus < 300;
+    const userCreatedText = output?.userCreated === true ? 'Yes' : output?.userCreated === false ? 'No' : '—';
+    const createdAppSecret =
+      output?.lastAction === 'create_app' && output.httpStatus >= 200 && output.httpStatus < 300
+        ? (output?.responseJson?.client_secret as string | undefined)
+        : undefined;
 
     const safeUsersQuery = htmlEscape(args.usersQuery);
     const selectedClientId = htmlEscape(args.form.client_id ?? '');
@@ -513,9 +521,6 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     const selectedAppReturnTo = htmlEscape(args.form.app_return_to ?? '');
     const selectedCode = htmlEscape(args.form.code ?? '');
     const selectedClientSecret = htmlEscape(args.form.client_secret ?? '');
-
-    const outputJsonPretty = output?.responseJson ? htmlEscape(JSON.stringify(output.responseJson, null, 2)) : '';
-    const outputRaw = output ? htmlEscape(output.responseText || '') : '';
 
     const usersPageCount = Math.max(1, Math.ceil(args.usersTotalMatching / Math.max(1, args.usersPageSize)));
     const usersPage = Math.min(Math.max(args.usersPage, 1), usersPageCount);
@@ -529,7 +534,9 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
           : `<span class="chip" data-tone="warning">Disabled</span>`;
         const cbCount = c.redirect_uris.length;
         const isSelected = (args.form.client_id ?? '') === c.client_id;
-        return `<button class="listBtn" type="button" data-app="${htmlEscape(c.client_id)}" style="border-color:${
+        return `<a class="listBtn" href="/admin/?tab=apps&client_id=${encodeURIComponent(
+          c.client_id
+        )}" data-app="${htmlEscape(c.client_id)}" style="border-color:${
           isSelected ? 'rgba(255,43,214,0.55)' : 'var(--border)'
         }">
           <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
@@ -538,7 +545,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
               cbCount === 1 ? '' : 's'
             }</span></div>
           </div>
-        </button>`;
+        </a>`;
       })
       .join('');
 
@@ -558,7 +565,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
       'Passhroom Admin',
       `<div class="top">
         <div class="brand">
-          <img src="/assets/poison-shroom.png" alt="" />
+          <img src="/assets/passhroom.png" alt="" />
           <h1>Passhroom</h1>
           <span class="pill">admin</span>
           <span class="tag">${htmlEscape(args.sessionEmail)}</span>
@@ -579,6 +586,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
               <div class="tabs">
                 <a class="tab" href="/admin/?tab=users&q=${encodeURIComponent(args.usersQuery)}" aria-current="${args.tab === 'users' ? 'page' : 'false'}">Users</a>
                 <a class="tab" href="/admin/?tab=apps" aria-current="${args.tab === 'apps' ? 'page' : 'false'}">Apps</a>
+                <a class="tab" href="/admin/?tab=create-app" aria-current="${args.tab === 'create-app' ? 'page' : 'false'}">Create app</a>
                 <a class="tab" href="/admin/?tab=activity&ac=${encodeURIComponent(args.activityClientId)}&ae=${encodeURIComponent(args.activityEmailPrefix)}" aria-current="${args.tab === 'activity' ? 'page' : 'false'}">Activity</a>
               </div>
             </div>
@@ -644,21 +652,37 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
                       </form>
                       <div class="help" title="Derived from login_requests and auth_codes tables."><span class="hintIcon">ⓘ</span>Latest auth events (click one to load).</div>
                       <div class="stack" style="margin-top:10px">${activityItems || '<div class="muted">No recent activity.</div>'}</div>`
-                    : (() => {
-                        const selected = (args.form.client_id ?? '').trim();
-                        const selectedClient = selected ? args.clients.find((c) => c.client_id === selected) : undefined;
-                        const callbacks = selectedClient?.redirect_uris ?? [];
-                        const selectedSecret = (selectedClient as any)?.client_secret_plain as string | null | undefined;
-
-                        return `<div class="help" style="white-space:normal" title="These values come from your app’s OAuth-style integration."><span class="hintIcon">ⓘ</span>
-                          <strong>App ID</strong> is the identifier your app sends to Passhroom (as <span class="mono">client_id</span>) when it calls <span class="mono">/v1/auth/start</span> and <span class="mono">/v1/auth/token</span>.
-                          <br/><strong>Callback URL</strong> is where Passhroom redirects the user after they click the magic link (Passhroom appends <span class="mono">?code=…&state=…</span>). It must exactly match an allowlisted callback URL.
+                    : args.tab === 'create-app'
+                      ? `<div class="help" style="white-space:normal" title="Creates a new app (client)."><span class="hintIcon">ⓘ</span>
+                          Create an integration for one app/service. You’ll copy the <span class="mono">client_secret</span> into your app’s config.
                         </div>
+
+                        ${
+                          createdAppSecret
+                            ? `<div class="panel" style="padding:12px; border:1px solid var(--border); background: rgba(0,0,0,0.16); margin-top:10px;">
+                                <div class="help" style="white-space:normal" title="Store this secret in your app."><span class="hintIcon">ⓘ</span>
+                                  <strong>App created.</strong> Save this <span class="mono">client_secret</span> in your app config.
+                                </div>
+                                <div style="margin-top:10px">
+                                  <label class="small">client_secret</label>
+                                  <div style="display:flex; gap:10px; align-items:center;">
+                                    <code style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border:1px solid var(--border); background: rgba(0,0,0,0.18); border-radius: 12px; padding: 10px;">${htmlEscape(createdAppSecret)}</code>
+                                    <button class="copyBtn" type="button" data-copy="${htmlEscape(createdAppSecret)}">Copy</button>
+                                  </div>
+                                </div>
+                                <div class="btnRow" style="margin-top:10px">
+                                  <a class="tab" href="/admin/?tab=apps&client_id=${encodeURIComponent(String(output?.responseJson?.client_id ?? ''))}">View in Apps</a>
+                                </div>
+                              </div>`
+                            : output && output.lastAction === 'create_app' && output.httpStatus >= 400
+                              ? `<div class="chip" data-tone="danger" style="margin-top:10px">${htmlEscape(output.friendlyError || 'Could not create app.')}</div>`
+                              : ''
+                        }
 
                         <form method="post" action="/admin/apps/create" style="margin-bottom:10px; margin-top:10px">
                           <label for="new_client_id">Create app</label>
-                          <div class="help" style="white-space:normal" title="Creates a new app (client) and shows the one-time secret in Run Output."><span class="hintIcon">ⓘ</span>
-                            Create an integration for one app/service. You’ll copy the one-time <span class="mono">client_secret</span> into your app’s config.
+                          <div class="help" style="white-space:normal" title="Creates a new app (client)."><span class="hintIcon">ⓘ</span>
+                            Create an integration for one app/service.
                           </div>
                           <div class="row" style="margin-top:8px">
                             <div>
@@ -686,15 +710,43 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
                           <div class="btnRow" style="margin-top:8px">
                             <button class="btn" type="submit">Create app</button>
                           </div>
-                        </form>
+                        </form>`
+                      : (() => {
+                        const selected = (args.form.client_id ?? '').trim();
+                        const selectedClient = selected ? args.clients.find((c) => c.client_id === selected) : undefined;
+                        const callbacks = selectedClient?.redirect_uris ?? [];
+                        const selectedSecret = (selectedClient as any)?.client_secret_plain as string | null | undefined;
 
-                        <div style="height:1px; background:var(--border); margin: 10px 0;"></div>
+                        return `<div class="help" style="white-space:normal" title="These values come from your app’s OAuth-style integration."><span class="hintIcon">ⓘ</span>
+                          <strong>App ID</strong> is the identifier your app sends to Passhroom (as <span class="mono">client_id</span>) when it calls <span class="mono">/v1/auth/start</span> and <span class="mono">/v1/auth/token</span>.
+                          <br/><strong>Callback URL</strong> is where Passhroom redirects the user after they click the magic link (Passhroom appends <span class="mono">?code=…&state=…</span>). It must exactly match an allowlisted callback URL.
+                        </div>
 
                         ${selected
                           ? `<div class="panel" style="padding:12px; border:1px solid var(--border); background: rgba(0,0,0,0.16);">
                               <div class="help" title="Click an app on the list to load it."><span class="hintIcon">ⓘ</span><strong>Selected app</strong>: <code id="apps_selected_label">${htmlEscape(
                                 selected
                               )}</code></div>
+
+                              <div style="margin-top:10px">
+                                <label class="small">DB record (clients table)</label>
+                                <pre class="mono" style="margin:6px 0 0; padding:10px; border-radius:12px; border:1px solid var(--border); background: rgba(0,0,0,0.18); overflow:auto; max-height:240px;">${htmlEscape(
+                                  JSON.stringify(
+                                    {
+                                      client_id: selectedClient?.client_id ?? selected,
+                                      is_enabled: selectedClient?.is_enabled ?? null,
+                                      redirect_uris: selectedClient?.redirect_uris ?? [],
+                                      allowed_origins: (selectedClient as any)?.allowed_origins ?? [],
+                                      created_at: (selectedClient as any)?.created_at ?? '',
+                                      client_secret_hash: (selectedClient as any)?.client_secret_hash ?? null,
+                                      client_secret_plain: (selectedClient as any)?.client_secret_plain ?? null
+                                    },
+                                    null,
+                                    2
+                                  )
+                                )}</pre>
+                                <div class="help" style="white-space:normal" title="This is a snapshot of the selected row."><span class="hintIcon">ⓘ</span>Shows the full client row as used by this admin page.</div>
+                              </div>
 
                               <div style="margin-top:10px">
                                 <label class="small">App secret (client_secret)</label>
@@ -763,92 +815,6 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
                         <div class="stack" style="margin-top:10px">${appsItems || '<div class="muted">No apps found.</div>'}</div>`;
                       })()
               }
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Run Output -->
-        <div class="col">
-          <div class="panel" style="display:flex; flex-direction:column; gap:12px; min-height:0; flex:1 1 auto;">
-            <div class="panelTitle">
-              <h2>Run Output</h2>
-              <span class="chip" data-tone="${tone}">${htmlEscape(statusLabel)}</span>
-            </div>
-
-            <div class="panelScroll" style="min-height:0; flex:1 1 auto;">
-            ${
-              !output
-                ? `<div class="help" style="white-space:normal" title="Select a user/app, filter activity, or run a test."><span class="hintIcon">ⓘ</span>
-                    This panel shows results from admin actions (create app, rotate secret, enable/disable, filters, sign-in test).
-                  </div>
-                  <div class="muted" style="margin-top:10px">No output yet.</div>`
-                : ''
-            }
-            <div class="kv">
-              <div class="k">Last action</div>
-              <div class="v" id="out_last_action" title="${htmlEscape(lastActionText)}">${htmlEscape(lastActionText)}</div>
-
-              <div class="k">HTTP</div>
-              <div class="v" id="out_http">${output ? `<span class="chip" data-tone="${tone}" id="out_http_chip">${output.httpStatus}</span>` : '—'}</div>
-
-              <div class="k">User created</div>
-              <div class="v" id="out_user_created">${htmlEscape(userCreatedText)}</div>
-
-              <div class="k">Client</div>
-              <div class="v" id="out_client" title="${htmlEscape(output?.client_id ?? args.form.client_id ?? '')}">
-                <code id="out_client_code">${htmlEscape(output?.client_id ?? args.form.client_id ?? '—')}</code>
-                <button class="copyBtn" type="button" id="out_client_copy" data-copy="${htmlEscape(output?.client_id ?? args.form.client_id ?? '')}">Copy</button>
-              </div>
-
-              <div class="k">Callback URL</div>
-              <div class="v" id="out_redirect" title="${htmlEscape(output?.redirect_uri ?? args.form.redirect_uri ?? '')}">
-                <code id="out_redirect_code">${htmlEscape(output?.redirect_uri ?? args.form.redirect_uri ?? '—')}</code>
-                <button class="copyBtn" type="button" id="out_redirect_copy" data-copy="${htmlEscape(output?.redirect_uri ?? args.form.redirect_uri ?? '')}">Copy</button>
-              </div>
-
-              <div class="k">Timestamp</div>
-              <div class="v" id="out_ts">${htmlEscape(output?.timestampIso ?? '—')}</div>
-
-              <div class="k">Request ID</div>
-              <div class="v" id="out_reqid"><code id="out_reqid_code">${htmlEscape(output?.requestId ?? '—')}</code>
-                ${output?.requestId ? `<button class="copyBtn" type="button" id="out_reqid_copy" data-copy="${htmlEscape(output.requestId)}">Copy</button>` : ''}
-              </div>
-            </div>
-
-            ${
-              output?.friendlyError
-                ? `<div class="chip" data-tone="danger" title="Raw error is below">${htmlEscape(output.friendlyError)}</div>`
-                : ''
-            }
-
-            ${
-              output
-                ? `<div style="min-height:0; border: 1px solid var(--border); border-radius: 12px; padding: 10px; background: rgba(0,0,0,0.16);" id="out_payload">
-              <details>
-                <summary class="small">Response JSON</summary>
-                ${
-                  output?.responseJson
-                    ? `<pre style="margin:10px 0 0 0" id="out_json">${outputJsonPretty}</pre>`
-                    : `<div class="muted" style="margin-top:8px" id="out_json">No JSON to display yet.</div>`
-                }
-              </details>
-
-              <details style="margin-top:10px">
-                <summary class="small">Raw response / error</summary>
-                <pre style="margin:10px 0 0 0" id="out_raw">${outputRaw || '—'}</pre>
-              </details>
-            </div>`
-                : ''
-            }
-
-            ${
-              output?.responseJson?.user_id || output?.responseJson?.email
-                ? `<div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    ${output.responseJson?.user_id ? `<button class="copyBtn" type="button" data-copy="${htmlEscape(String(output.responseJson.user_id))}">Copy user_id</button>` : ''}
-                    ${output.responseJson?.email ? `<button class="copyBtn" type="button" data-copy="${htmlEscape(String(output.responseJson.email))}">Copy email</button>` : ''}
-                  </div>`
-                : ''
-            }
             </div>
           </div>
         </div>
@@ -1274,68 +1240,8 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
                 if (ev.email) { var em = qs('#user_email'); if (em) em.value = ev.email; }
                 if (ev.redirect_uri) { var rs = qs('#redirect_select'); if (rs) rs.value = ev.redirect_uri; }
                 if (ev.state) { var st = qs('#state_input'); if (st) st.value = ev.state; }
-
-                // Populate output panel with event payload (info)
-                var outLast = qs('#out_last_action');
-                if (outLast) outLast.textContent = 'activity_loaded';
-                var outHttp = qs('#out_http');
-                if (outHttp) outHttp.textContent = '—';
-                var uc = qs('#out_user_created');
-                if (uc) uc.textContent = '—';
-                var oc = qs('#out_client_code');
-                if (oc) oc.textContent = ev.client_id || '—';
-                var ocb = qs('#out_client_copy');
-                if (ocb) ocb.setAttribute('data-copy', ev.client_id || '');
-                var orc = qs('#out_redirect_code');
-                if (orc) orc.textContent = ev.redirect_uri || '—';
-                var orcb = qs('#out_redirect_copy');
-                if (orcb) orcb.setAttribute('data-copy', ev.redirect_uri || '');
-                var ots = qs('#out_ts');
-                if (ots) ots.textContent = ev.ts || new Date().toISOString();
-                var req = qs('#out_reqid_code');
-                if (req) req.textContent = '—';
-
-                var jsonEl = qs('#out_json');
-                if (jsonEl) {
-                  try { jsonEl.textContent = JSON.stringify(ev, null, 2); } catch (e2) { jsonEl.textContent = String(ev); }
-                }
-                var rawEl = qs('#out_raw');
-                if (rawEl) rawEl.textContent = JSON.stringify(ev);
-
                 syncStep3();
               } catch (err) {}
-            });
-          }
-
-          function wireAppClicks() {
-            document.addEventListener('click', function (e) {
-              var t = e.target;
-              if (!(t instanceof HTMLElement)) return;
-              var btn = t.closest('button[data-app]');
-              if (!btn) return;
-              var appId = btn.getAttribute('data-app') || '';
-              if (!appId) return;
-              var cs = qs('#client_select');
-              if (cs) {
-                cs.value = appId;
-                applyClientFilter();
-                populateRedirects();
-              }
-
-              try {
-                var lbl = qs('#apps_selected_label');
-                if (lbl) lbl.textContent = appId;
-                var els = document.querySelectorAll('input.appsClientId');
-                els.forEach(function (el) { try { el.value = appId; } catch (e2) {} });
-              } catch (err2) {}
-
-              var outLast = qs('#out_last_action');
-              if (outLast) outLast.textContent = 'app_loaded';
-              var oc = qs('#out_client_code');
-              if (oc) oc.textContent = appId;
-              var ocb = qs('#out_client_copy');
-              if (ocb) ocb.setAttribute('data-copy', appId);
-              syncStep3();
             });
           }
 
@@ -1381,7 +1287,6 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
           wirePasteClipboard();
           wireCopyButtons();
           wireActivityClicks();
-          wireAppClicks();
           wireTestModal();
           syncStep3();
         })();
@@ -1393,7 +1298,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     q: string;
     usersPage: number;
     usersPageSize: number;
-    tab: 'users' | 'activity' | 'apps';
+    tab: 'users' | 'activity' | 'apps' | 'create-app';
     clientsQuery: string;
     activityClientId: string;
     activityEmailPrefix: string;
@@ -1476,14 +1381,17 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     const totalUsers = (countRes.rows[0] as { count: number }).count;
 
     const clientsRes = await pool.query(
-      `SELECT client_id, redirect_uris, is_enabled, client_secret_plain
+      `SELECT client_id, redirect_uris, allowed_origins, is_enabled, created_at, client_secret_hash, client_secret_plain
        FROM clients
        ORDER BY client_id ASC`
     );
     const clients = clientsRes.rows.map((r: any) => ({
       client_id: String(r.client_id),
       redirect_uris: Array.isArray(r.redirect_uris) ? (r.redirect_uris as string[]) : [],
+      allowed_origins: Array.isArray(r.allowed_origins) ? (r.allowed_origins as string[]) : [],
       is_enabled: Boolean(r.is_enabled),
+      created_at: r.created_at ? new Date(r.created_at).toISOString() : '',
+      client_secret_hash: r.client_secret_hash === null || r.client_secret_hash === undefined ? null : String(r.client_secret_hash),
       client_secret_plain: r.client_secret_plain === null || r.client_secret_plain === undefined ? null : String(r.client_secret_plain)
     }));
 
@@ -1535,7 +1443,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
       'Passhroom Admin Login',
       `<div class="top">
         <div class="brand">
-          <img src="/assets/poison-shroom.png" alt="" />
+          <img src="/assets/passhroom.png" alt="" />
           <h1>Passhroom</h1>
           <span class="pill">admin</span>
         </div>
@@ -1610,7 +1518,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
       page(
         'Admin link sent',
         `<div class="top">
-          <div class="brand"><img src="/assets/poison-shroom.png" alt="" /><h1>Passhroom</h1><span class="pill">admin</span></div>
+          <div class="brand"><img src="/assets/passhroom.png" alt="" /><h1>Passhroom</h1><span class="pill">admin</span></div>
           <a href="/admin/login">Back</a>
         </div>
         <div class="panel">
@@ -1702,7 +1610,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     const q = String((req.query as any)?.q ?? '').trim().toLowerCase();
     const cq = String((req.query as any)?.cq ?? '').trim();
     const tabRaw = String((req.query as any)?.tab ?? 'users');
-    const tab = tabRaw === 'activity' ? 'activity' : tabRaw === 'apps' ? 'apps' : 'users';
+    const tab = tabRaw === 'activity' ? 'activity' : tabRaw === 'apps' ? 'apps' : tabRaw === 'create-app' ? 'create-app' : 'users';
 
     const pageRaw = Number.parseInt(String((req.query as any)?.page ?? '1'), 10);
     const usersPage = Number.isFinite(pageRaw) && pageRaw > 0 ? pageRaw : 1;
@@ -1710,6 +1618,8 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
 
     const activityClientId = String((req.query as any)?.ac ?? '').trim();
     const activityEmailPrefix = String((req.query as any)?.ae ?? '').trim().toLowerCase();
+
+    const selectedClientId = String((req.query as any)?.client_id ?? '').trim();
 
     const usersTotalMatchingRes =
       q.length > 0
@@ -1754,14 +1664,18 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     const totalUsers = (countRes.rows[0] as { count: number }).count;
 
     const clientsRes = await pool.query(
-      `SELECT client_id, redirect_uris, is_enabled
+      `SELECT client_id, redirect_uris, allowed_origins, is_enabled, created_at, client_secret_hash, client_secret_plain
        FROM clients
        ORDER BY client_id ASC`
     );
     const clients = clientsRes.rows.map((r: any) => ({
       client_id: String(r.client_id),
       redirect_uris: Array.isArray(r.redirect_uris) ? (r.redirect_uris as string[]) : [],
-      is_enabled: Boolean(r.is_enabled)
+      allowed_origins: Array.isArray(r.allowed_origins) ? (r.allowed_origins as string[]) : [],
+      is_enabled: Boolean(r.is_enabled),
+      created_at: r.created_at ? new Date(r.created_at).toISOString() : '',
+      client_secret_hash: r.client_secret_hash === null || r.client_secret_hash === undefined ? null : String(r.client_secret_hash),
+      client_secret_plain: r.client_secret_plain === null || r.client_secret_plain === undefined ? null : String(r.client_secret_plain)
     }));
 
     const activityRes = await pool.query(
@@ -1828,7 +1742,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
       activity,
       activityClientId,
       activityEmailPrefix,
-      form: {},
+      form: selectedClientId ? { client_id: selectedClientId } : {},
       output: undefined
     });
 
@@ -1952,7 +1866,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     const body = page(
       'User details',
       `<div class="top">
-        <div class="brand"><img src="/assets/poison-shroom.png" alt="" /><h1>Passhroom</h1><span class="pill">admin</span></div>
+        <div class="brand"><img src="/assets/passhroom.png" alt="" /><h1>Passhroom</h1><span class="pill">admin</span></div>
         <a href="/admin/?tab=users">Back</a>
       </div>
       <div class="panel">
@@ -2003,7 +1917,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
 
   async function sendConsoleFromAction(params: {
     sessionEmail: string;
-    tab: 'users' | 'activity' | 'apps';
+    tab: 'users' | 'activity' | 'apps' | 'create-app';
     q: string;
     usersPage: number;
     usersPageSize: number;
@@ -2094,7 +2008,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
     return sendConsoleFromAction(
       {
         sessionEmail: session.email_normalized,
-        tab: 'apps',
+        tab: 'create-app',
         q: '',
         usersPage: 1,
         usersPageSize: 50,

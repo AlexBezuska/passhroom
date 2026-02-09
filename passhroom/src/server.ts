@@ -38,12 +38,13 @@ export async function buildServer() {
 
   // Favicon convenience routes (some browsers request these exact paths)
   app.get('/favicon.png', async (_req, reply) => {
-    reply.header('cache-control', 'public, max-age=86400');
+    // Keep this easy to refresh after deploys; favicons are heavily cached by browsers.
+    reply.header('cache-control', 'public, max-age=0, must-revalidate');
     return reply.redirect('/assets/favicons/favicon-196.png', 302);
   });
 
   app.get('/favicon.ico', async (_req, reply) => {
-    reply.header('cache-control', 'public, max-age=86400');
+    reply.header('cache-control', 'public, max-age=0, must-revalidate');
     return reply.redirect('/assets/favicons/favicon-196.png', 302);
   });
 

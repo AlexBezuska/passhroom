@@ -1,5 +1,5 @@
 <h1>
-  <img src="passhroom/assets/poison-shroom.png" alt="Passhroom logo" width="48" height="48" style="vertical-align: middle; margin-right: 8px;" />
+  <img src="passhroom/assets/passhroom.png" alt="Passhroom logo" width="48" height="48" style="vertical-align: middle; margin-right: 8px;" />
   Passhroom
 </h1>
 
