@@ -89,6 +89,7 @@ export async function registerAuth(app: FastifyInstance): Promise<void> {
       toEmail: emailNormalized,
       magicLinkUrl,
       appName: body.app_name,
+      clientId: body.client_id,
       expiresMinutes: env.tokenTtlMinutes
     });
 

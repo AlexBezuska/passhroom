@@ -28,6 +28,7 @@ When the user types their email in your app, your **server** calls Passhroom:
 ```json
 {
   "client_id": "my-app",
+  "app_name": "My App",
   "email": "user@example.com",
   "redirect_uri": "https://yourapp.com/auth/passhroom/callback",
   "state": "random_string_you_generate"
@@ -36,6 +37,7 @@ When the user types their email in your app, your **server** calls Passhroom:
 
 Notes:
 - Generate a random `state` and store it temporarily (simplest: in an httpOnly cookie or your server session).
+- Include `app_name` so the email Subject/From makes it obvious which app is requesting sign-in.
 - Passhroom emails the user a magic link.
 
 ## 2) Handle the callback (your app receives code + state)
