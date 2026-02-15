@@ -10,8 +10,8 @@ It is written for this environment:
 
 Tip:
 - Keep your personal deploy-host values in an uncommitted config file:
-  - copy `.deploy.env.example` → `.deploy.env`
-  - edit `.deploy.env`
+  - copy `servertron-docs/apps/passhroom/.deploy.env.example` → `servertron-docs/apps/passhroom/.deploy.env`
+  - edit `servertron-docs/apps/passhroom/.deploy.env`
 - Nginx container name: `nginx_web`
 - Certbot container name: `certbot`
 
@@ -194,7 +194,7 @@ Script:
 
 ### 6.2 Start/rebuild remotely
 
-- `scripts/deploy-host/rsync-deploy.sh --run-remote`
+- `servertron-docs/apps/passhroom/scripts/rsync-deploy.sh --run-remote`
 
 This runs on the server:
 

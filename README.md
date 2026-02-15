@@ -51,10 +51,29 @@ This repo supports an optional private operations docs submodule at `servertron-
 
 The submodule contains private infrastructure and server automation material that is intentionally not required for building, testing, running, or self-hosting Passhroom.
 
+Project maintainer note:
+
+- I use `servertron-docs` for my own private operations workflow.
+- If you are self-hosting Passhroom, you do **not** need `servertron-docs` and should deploy using your own infrastructure approach.
+
 Maintainer note:
 
 - Private deploy scripts live at `servertron-docs/apps/passhroom/scripts/`.
-- Public repo wrappers in `scripts/deploy-host/` delegate to those scripts so existing commands continue to work for maintainers.
+- Private deploy config lives at `servertron-docs/apps/passhroom/.deploy.env`.
+
+## Self-host your own way (brief)
+
+1) Configure env:
+
+`cp .env.example .env` and fill required values (`PASSHROOM_DB_PASSWORD`, `COOKIE_SECRET`, `PASSHROOM_PUBLIC_BASE_URL`, SMTP vars).
+
+2) Start services:
+
+`docker compose -f docker-compose.passhroom.yml up -d --build`
+
+3) Run migrations + route HTTPS:
+
+`docker exec -it passhroom-api sh -lc "cd /app && npm run migrate:up"`, then point your reverse proxy domain to Passhroom (`127.0.0.1:18080` by default).
 
 ## Documentation
 

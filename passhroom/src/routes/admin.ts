@@ -565,6 +565,15 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
       })
       .join('');
 
+    const activeTabLabel =
+      args.tab === 'users'
+        ? 'Users'
+        : args.tab === 'apps'
+          ? 'Apps'
+          : args.tab === 'create-app'
+            ? 'Create app'
+            : 'Activity';
+
     return page(
       'Passhroom Admin',
       `<div class="top">
@@ -586,7 +595,7 @@ export async function registerAdmin(app: FastifyInstance): Promise<void> {
         <div class="col">
           <div class="panel" style="display:flex; flex-direction:column; gap:12px; min-height:0;">
             <div class="panelTitle">
-              <h2>Data</h2>
+              <h2>${activeTabLabel}</h2>
               <div class="tabs">
                 <a class="tab" href="/admin/?tab=users&q=${encodeURIComponent(args.usersQuery)}" aria-current="${args.tab === 'users' ? 'page' : 'false'}">Users</a>
                 <a class="tab" href="/admin/?tab=apps" aria-current="${args.tab === 'apps' ? 'page' : 'false'}">Apps</a>
