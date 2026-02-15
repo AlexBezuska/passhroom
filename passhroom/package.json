@@ -1,0 +1,50 @@
+{
+  "name": "passhroom",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "type": "commonjs",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "assets:favicons": "npx -y pwa-asset-generator assets/passhroom.png assets/favicons --favicon --manifest",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "migrate:up": "node-pg-migrate -f node-pg-migrate.config.cjs up",
+    "migrate:down": "node-pg-migrate -f node-pg-migrate.config.cjs down",
+    "cli": "node dist/cli.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "RUN_INTEGRATION_TESTS=true vitest run"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.2.0",
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/multipart": "^9.0.3",
+    "@fastify/sensible": "^6.0.2",
+    "@fastify/static": "^8.0.4",
+    "argon2": "^0.41.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.2.1",
+    "ioredis": "^5.5.0",
+    "node-pg-migrate": "^7.7.1",
+    "nodemailer": "^6.9.14",
+    "pg": "^8.13.1",
+    "pino": "^9.4.0",
+    "pino-pretty": "^11.3.0",
+    "uuid": "^10.0.0",
+    "vanilla-picker": "^2.12.3",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.5",
+    "@types/nodemailer": "^6.4.16",
+    "@types/pg": "^8.11.10",
+    "@types/uuid": "^10.0.0",
+    "@types/yargs": "^17.0.33",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.0.5"
+  }
+}

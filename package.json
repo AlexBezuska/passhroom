@@ -1,0 +1,20 @@
+{
+  "name": "passhroom-root",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "servertron:deploy": "bash ./scripts/deploy-host/rsync-deploy.sh --run-remote",
+    "deploy": "bash ./scripts/deploy-host/rsync-deploy.sh --run-remote",
+    "deploy:sync": "bash ./scripts/deploy-host/rsync-deploy.sh",
+    "deploy:dry": "bash ./scripts/deploy-host/rsync-deploy.sh --dry-run",
+    "deploy:bootstrap-env": "bash ./scripts/deploy-host/rsync-deploy.sh --bootstrap-env",
+    "server:restart": "bash ./scripts/deploy-host/restart.sh",
+    "db:backup": "bash ./scripts/deploy-host/db-backup.sh",
+    "db:restore": "bash ./scripts/deploy-host/db-restore.sh",
+    "servertron:setup-domain-ssl": "bash ./scripts/deploy-host/setup-domain-ssl.sh",
+    "servertron:migrate": "bash ./scripts/deploy-host/run-migrations.sh",
+    "build": "npm --prefix passhroom run build",
+    "test": "npm --prefix passhroom run test",
+    "test:integration": "npm --prefix passhroom run test:integration"
+  }
+}

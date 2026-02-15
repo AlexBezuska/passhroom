@@ -1,0 +1,4 @@
+[submodule "servertron-docs"]
+	path = servertron-docs
+	url = git@github.com:AlexBezuska/servertron.git
+	update = none

@@ -1,0 +1,96 @@
+services:
+  passhroom-db:
+    image: postgres:16
+    container_name: passhroom-db
+    environment:
+      POSTGRES_DB: passhroom
+      POSTGRES_USER: passhroom
+      POSTGRES_PASSWORD: ${PASSHROOM_DB_PASSWORD}
+    volumes:
+      - passhroom_db_data:/var/lib/postgresql/data
+    networks:
+      - passhroom_internal
+
+  # Optional but recommended for rate limiting
+  passhroom-redis:
+    image: redis:7-alpine
+    container_name: passhroom-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - passhroom_redis_data:/data
+    networks:
+      - passhroom_internal
+
+  passhroom-api:
+    build:
+      context: ./passhroom
+      dockerfile: Dockerfile
+    container_name: passhroom-api
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 8080
+
+      # Required for admin/session cookies
+      COOKIE_SECRET: ${COOKIE_SECRET}
+
+      # Database
+      DATABASE_URL: postgres://passhroom:${PASSHROOM_DB_PASSWORD}@passhroom-db:5432/passhroom
+
+      # Redis (optional)
+      REDIS_URL: redis://passhroom-redis:6379
+
+      # Public base URL used in emails
+      PASSHROOM_PUBLIC_BASE_URL: ${PASSHROOM_PUBLIC_BASE_URL}
+
+      # SMTP
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      SMTP_FROM: ${SMTP_FROM}
+      SMTP_FROM_NAME: ${SMTP_FROM_NAME}
+
+      # Admin dashboard
+      ADMIN_ENABLED: ${ADMIN_ENABLED:-true}
+      ADMIN_LOGIN_TTL_MINUTES: ${ADMIN_LOGIN_TTL_MINUTES:-10}
+      ADMIN_SESSION_TTL_HOURS: ${ADMIN_SESSION_TTL_HOURS:-12}
+      ADMIN_EMAIL_ALLOWLIST: ${ADMIN_EMAIL_ALLOWLIST:-}
+      ADMIN_REQUIRE_HEADER_NAME: ${ADMIN_REQUIRE_HEADER_NAME:-}
+      ADMIN_REQUIRE_HEADER_VALUE: ${ADMIN_REQUIRE_HEADER_VALUE:-}
+
+      # Security / behavior
+      TOKEN_TTL_MINUTES: "10"
+      CODE_TTL_MINUTES: "5"
+      REQUIRE_HTTPS: ${REQUIRE_HTTPS:-true}
+      LOG_REDACT_PII: "true"
+      RESEND_COOLDOWN_SECONDS: "60"
+      MAX_MAGIC_ATTEMPTS: "5"
+
+      # Rate limit defaults (override via .env)
+      RL_IP_PER_MINUTE: ${RL_IP_PER_MINUTE:-10}
+      RL_EMAIL_PER_MINUTE: ${RL_EMAIL_PER_MINUTE:-3}
+      RL_EMAIL_PER_HOUR: ${RL_EMAIL_PER_HOUR:-10}
+      RL_CLIENT_PER_MINUTE: ${RL_CLIENT_PER_MINUTE:-20}
+
+      RATE_LIMIT_BACKEND: ${RATE_LIMIT_BACKEND:-auto}
+    depends_on:
+      - passhroom-db
+      - passhroom-redis
+    networks:
+      - passhroom_internal
+      - web
+    # For nginx containers running in host-network mode, publish the API port on localhost.
+    ports:
+      - "127.0.0.1:18080:8080"
+
+volumes:
+  passhroom_db_data:
+  passhroom_redis_data:
+
+networks:
+  passhroom_internal:
+    driver: bridge
+
+  # Must match the external network your nginx container is on
+  web:
+    external: true

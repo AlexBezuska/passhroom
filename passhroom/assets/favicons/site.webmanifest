@@ -1,0 +1,22 @@
+{
+  "name": "Passhroom",
+  "short_name": "Passhroom",
+  "icons": [
+    {
+      "src": "/assets/favicons/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/favicons/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/",
+  "background_color": "#FEF9E3",
+  "theme_color": "#7D3998"
+}

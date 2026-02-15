@@ -1,0 +1,22 @@
+# Node
+passhroom/node_modules/
+passhroom/dist/
+passhroom/npm-debug.log*
+passhroom/.env
+
+# Env files (never commit secrets)
+.env
+**/.env
+.env.*
+**/.env.*
+!.env.example
+!**/.env.example
+
+# Local deploy-host config (personal host/path/email; never commit)
+.deploy.env
+
+# Stray compiled tests (should not be committed)
+passhroom/test/**/*.js
+
+.DS_Store
+backups
